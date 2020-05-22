@@ -42,6 +42,11 @@
                         <i class="fa fa-paper-plane"></i> <span>Kirim Surat</span>
                     </a>
                 </li>
+                <li>
+                    <a href="<?= base_url('surat'); ?>">
+                        <i class="fa fa-envelope"></i> <span>Surat Saya</span>
+                    </a>
+                </li>
             <?php endif; ?>
             <?php if ($user['akses'] == 1) : ?>
                 <li>

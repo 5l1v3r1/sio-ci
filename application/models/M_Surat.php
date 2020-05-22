@@ -9,7 +9,6 @@ class M_Surat extends CI_Model
     {
         $this->db->select('*');
         return $this->db->from('tb_surat')
-            ->join('tb_user', 'tb_surat.kelas=tb_user.kelas')
             ->join('tb_kelas', 'tb_surat.kelas=tb_kelas.id_kelas')
             ->get()
             ->result();
@@ -27,7 +26,7 @@ class M_Surat extends CI_Model
         $this->db->insert('tb_surat', $data);
         $this->session->set_flashdata('msg', '<div class="alert alert-success alert-dismissible">
         <button type="button" class="close" data-dismiss="alert">&times;</button>Surat Berhasil Dikirim</div>');
-        redirect('dashboard');
+        redirect('surat');
     }
 
     public function hapusSurat()

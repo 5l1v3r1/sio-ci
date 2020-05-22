@@ -25,7 +25,20 @@ class Surat extends CI_Controller
     public function index()
     {
         if ($this->session->userdata('akses') == 2) {
-            redirect('dashboard');
+            $session = $this->session->userdata('id');
+            $data = array(
+                'title' => 'Surat Saya',
+                'subtitle' => 'Menu Utama',
+                'user' => $this->db->get_where('tb_user', ['id_user' => $session])->row_array(),
+                'jumlah_surat' => $this->_jumlah_surat(),
+            );
+            $data['main'] = $this->db->get_where('tb_surat', ['nama' => $data['user']['nama']])->result();
+            $this->load->view('templates/dashboard/v_header', $data);
+            $this->load->view('templates/dashboard/v_navbar', $data);
+            $this->load->view('templates/dashboard/v_sidebar', $data);
+            $this->load->view('templates/dashboard/v_crumb', $data);
+            $this->load->view('surat/v_data2', $data);
+            $this->load->view('templates/dashboard/v_footer');
         } else {
             $session = $this->session->userdata('id');
             $data = array(
